@@ -1,10 +1,16 @@
 from django.db import models
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 from django.utils.encoding import smart_unicode
 
 # Create your models here.
 
+alphanum = RegexValidator(r'^[0-9a-z A-Z]*$','Only Alphanumeric values are allowed')
+num = RegexValidator(r'^[0-9]*$','Only Integer values are allowed')
+
+
 class department(models.Model):
-    dept_code = models.CharField(max_length = 10, primary_key = True, blank = False)
+    dept_code = models.CharField(unique=True, max_length = 10, primary_key = True, blank = False)
     dept_name = models.CharField(max_length = 50, null = True, blank = True)
     dept_info = models.TextField()
     
@@ -19,7 +25,7 @@ class faculty(models.Model):
     qualification = models.CharField(max_length = 100, null = True, blank = True)
     area_of_interest = models.CharField(max_length = 100, null = True, blank = True)
     contact = models.CharField(max_length = 50, null = True, blank = True)
-    email = models.EmailField(null = False, blank = False)
+    email = models.EmailField(unique = True, null = False, blank = False)
     status = models.CharField(max_length = 10, null = True, blank = True)
     
     def __unicode__(self):
@@ -27,10 +33,11 @@ class faculty(models.Model):
 
 
 class student(models.Model):
-    roll_no = models.CharField(max_length = 10, primary_key = True, blank = False)
+    roll_no = models.CharField(unique = True, max_length = 10, primary_key = True,
+                               blank = False, validators=[alphanum])
     name = models.CharField(max_length = 50, null = False, blank = False)
     batch = models.CharField(max_length = 30, null = False, blank = False)
-    email = models.EmailField(null = False, blank = False)
+    email = models.EmailField(unique = True, null = False, blank = False)
 
     def __unicode__(self):
         return smart_unicode(self.roll_no)+' : '+smart_unicode(self.name)
@@ -89,24 +96,4 @@ class image(models.Model):
     
     def __unicode__(self):
         return smart_unicode(self.image_id)+' : '+smart_unicode(self.caption)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
