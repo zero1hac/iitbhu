@@ -25,7 +25,8 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^$', 'dept.views.home', name = 'home'),
     url(r'^Home', 'dept.views.home', name = 'home'),
-    url(r'^Computer-Science-and-Engineering', 'dept.views.department', name = 'CSE'),
+    #url(r'^Computer-Science-and-Engineering', 'dept.views.department', name = 'CSE'),
+    url(r'^(\s+)/$', 'dept.views.department', name = 'CSE'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
