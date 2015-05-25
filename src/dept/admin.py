@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import department,faculty,student,staff,notification,course,gallery,image
+from .models import Department,faculty,student,staff,notification,course,gallery,image
 
 
 class deptAdmin(admin.ModelAdmin):
     class Meta:
-        model = department
+        model = Department
         model = faculty
         model = student
         model = staff
@@ -15,7 +15,7 @@ class deptAdmin(admin.ModelAdmin):
         model = gallery
         model = image
         
-admin.site.register(department, deptAdmin)
+admin.site.register(Department, deptAdmin)
 admin.site.register(faculty, deptAdmin)
 admin.site.register(student, deptAdmin)
 admin.site.register(staff, deptAdmin)

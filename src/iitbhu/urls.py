@@ -13,7 +13,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,13 +22,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = [
+urlpatterns = patterns('',
     url(r'^$', 'dept.views.home', name = 'home'),
     url(r'^Home', 'dept.views.home', name = 'home'),
     #url(r'^Computer-Science-and-Engineering', 'dept.views.department', name = 'CSE'),
-    url(r'^(\s+)/$', 'dept.views.department', name = 'CSE'),
+    url(r'^department/(?P<dept_code1>\w+)/$', 'dept.views.department', name = 'CSE'),
     url(r'^admin/', include(admin.site.urls)),
-]
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

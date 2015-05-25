@@ -9,7 +9,7 @@ alphanum = RegexValidator(r'^[0-9a-z A-Z]*$','Only Alphanumeric values are allow
 num = RegexValidator(r'^[0-9]*$','Only Integer values are allowed')
 
 
-class department(models.Model):
+class Department(models.Model):
     dept_code = models.CharField(unique=True, max_length = 10, primary_key = True, blank = False)
     dept_name = models.CharField(max_length = 50, null = True, blank = True)
     dept_info = models.TextField()
